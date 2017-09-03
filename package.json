@@ -1,17 +1,28 @@
 {
   "name": "local-static-server",
   "version": "1.0.0",
-  "description": "",
+  "description": "Local nodeJS web server for static files",
   "main": "index.js",
-  "author": "gbarthos",
+  "author": "GBarthos",
   "license": "ISC",
-  "homepage": "",
+  "homepage": "https://github.com/GBarthos/local-static-server",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/GBarthos/local-static-server"
+  },
+  "files": [
+    "src",
+    "index.js",
+    "cli.js"
+  ],
+  "directories": {
+    "bin": "src"
   },
   "keywords": [
   ],
+  "bugs": {
+    "url": "https://github.com/GBarthos/local-static-server/issues"
+  },
   "config": {
     "port": "3000"
   },
@@ -27,5 +38,8 @@
     "cors": "^2.8.4",
     "express": "^4.15.4",
     "morgan": "^1.8.2"
+  },
+  "engines": {
+    "node": ">=6.11"
   }
 }
