@@ -1,0 +1,31 @@
+{
+  "name": "local-static-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "author": "gbarthos",
+  "license": "ISC",
+  "homepage": "",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "keywords": [
+  ],
+  "config": {
+    "port": "3000"
+  },
+  "bin": {
+    "local-server": "cli.js",
+    "local-static-server": "cli.js"
+  },
+  "scripts": {
+    "start": "node index.js / --port",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "cors": "^2.8.4",
+    "express": "^4.15.4",
+    "morgan": "^1.8.2"
+  }
+}
