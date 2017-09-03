@@ -1,7 +1,7 @@
 'use strict';
 const path = require('path');
 
-const DEFAULT_PORT = 3360;
+const DEFAULT_PORT = 3000;
 const DEFAULT_DIRECTORY = '';
 const HELP_FLAG = '--help';
 const HELP_SHORTHAND_FLAG = '-h';
