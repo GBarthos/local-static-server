@@ -2,7 +2,7 @@
   "name": "local-static-server",
   "version": "1.0.1",
   "description": "Local nodeJS web server for static files",
-  "main": "index.js",
+  "main": "src/index.js",
   "author": "GBarthos",
   "license": "ISC",
   "homepage": "https://github.com/GBarthos/local-static-server",
@@ -12,11 +12,10 @@
   },
   "files": [
     "src",
-    "index.js",
-    "cli.js"
+    "bin"
   ],
   "directories": {
-    "bin": "src"
+    "lib": "src"
   },
   "keywords": [
     "server",
@@ -36,7 +35,7 @@
     "local-server": "bin/local-server.js"
   },
   "scripts": {
-    "start": "node index.js / --port",
+    "start": "node src/index.js / --port",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {

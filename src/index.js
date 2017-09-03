@@ -1,8 +1,8 @@
 'use strict';
 
-const app = require('./src/application');
-const log = require('./src/logger');
-const getPort = require('./src/port');
+const app = require('./application');
+const log = require('./logger');
+const getPort = require('./port');
 
 const {
     directory,
@@ -10,13 +10,13 @@ const {
     help,
     version,
     silent
-} = require('./src/parser');
+} = require('./parser');
 const {
     getPortCallback,
     gracefulShutdown,
     handleHelpArgument,
     handleVersionArgument
-} = require('./src/helpers');
+} = require('./helpers');
 
 handleHelpArgument({ help });
 handleVersionArgument({ version });
