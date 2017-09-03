@@ -19,6 +19,12 @@
     "bin": "src"
   },
   "keywords": [
+    "server",
+    "local",
+    "static",
+    "nodejs",
+    "http",
+    "web"
   ],
   "bugs": {
     "url": "https://github.com/GBarthos/local-static-server/issues"
@@ -27,8 +33,7 @@
     "port": "3000"
   },
   "bin": {
-    "local-server": "cli.js",
-    "local-static-server": "cli.js"
+    "local-server": "bin/local-server.js"
   },
   "scripts": {
     "start": "node index.js / --port",
