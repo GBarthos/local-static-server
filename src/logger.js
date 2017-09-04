@@ -8,20 +8,15 @@ function bare() {
 }
 
 function log() {
-    const message = Array.prototype.slice.call(arguments)
-        .filter((item) => typeof item === 'string')
-        .join(' ')
-        .trim();
-    bare.call(this, '[%s][%s] %s', new Date().toISOString(), 'Server', message);
+    const args = Array.prototype.slice.call(arguments);
+    const params = [].concat(['[%s][%s] %s', new Date().toISOString(), 'Server'], args);
+    bare.apply(this, params);
 }
 
 function err() {
-    const message = Array.prototype.slice.call(arguments)
-        .filter((item) => typeof item === 'string')
-        .join(' ')
-        .trim();
-    const text = util.format.call(this, '[ERROR] %s', message);
-    process.nextTick(console.error, text);
+    const args = Array.prototype.slice.call(arguments);
+    const params = [].concat(['[ERROR] %s'], args);
+    bare.apply(this, params);
 }
 
 log.bare = bare;
