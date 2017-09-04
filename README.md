@@ -27,7 +27,7 @@ Examples:
 $ local-server / 9000 
 [2017-09-03T21:39:05.760Z][Server] server started at http://127.0.0.1:9000/ on IPv4
 [2017-09-03T21:39:05.762Z][Server] ... running on pid [89776]
-[2017-09-03T21:39:05.762Z][Server] ... serving folder "/Users/SM360/Documents/workspace/PERSO/local-static-server/"
+[2017-09-03T21:39:05.762Z][Server] ... serving folder "/Users/gbarthos/Documents/web/"
 ```
 
 When the given port number is already in use on local IPV4 address, server walks other ports by incrementing given port number until a free port is found.

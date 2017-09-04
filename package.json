@@ -35,7 +35,7 @@
     "local-server": "bin/local-server.js"
   },
   "scripts": {
-    "start": "node src/index.js / --port",
+    "start": "node src/index.js / $npm_package_config_port",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
