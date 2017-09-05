@@ -39,13 +39,13 @@ Version:        local-static-server@2.0.0
 Example output:
 ```
 $ local-server / 9000 
-[2017-09-03T21:39:05.760Z][Server] server started at http://127.0.0.1:9000/ on IPv4
-[2017-09-03T21:39:05.762Z][Server] ... running on pid [89776]
-[2017-09-03T21:39:05.762Z][Server] ... serving folder "/Users/gbarthos/Documents/web/"
+[2017-09-05T20:56:32.042Z][Server] server started at http://127.0.0.1:9000/ on IPv4
+[2017-09-05T20:56:32.044Z][Server] ... running on pid [89776]
+[2017-09-05T20:56:32.044Z][Server] ... serving folder "/Users/gbarthos/Documents/web/"
 GET / 200 - - 12.527 ms
 ^C (SIGINT)
-[2017-09-05T20:41:10.732Z][Server] ... graceful shutdown signaled
-[2017-09-05T20:41:10.733Z][Server] server closed
+[2017-09-05T20:56:33.357Z][Server] ... graceful shutdown signaled
+[2017-09-05T20:56:33.357Z][Server] server closed
 ```
 
 When the given port number is already in use on local IPV4 address, server walks other ports by incrementing the number until a free port is found.

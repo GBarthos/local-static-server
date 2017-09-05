@@ -50,7 +50,8 @@ function _printUsage() {
         `\n` +
         `${pck.author ? `\nAuthor: \t${author}` : ''}` +
         `${pck.license ? `\nLicense: \t${pck.license}` : ''}` +
-        `\nVersion: \t${pck.name}@${pck.version}`
+        `\nVersion: \t${pck.name}@${pck.version}` +
+        `\n`
     );
 }
 
