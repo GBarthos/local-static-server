@@ -56,26 +56,26 @@ function _printUsage() {
     const author = _printAuthor();
 
     return (
-`Usage: \tlocal-server [directory] [port] [OPTIONS]
-
-Inputs:
-    directory \t The directory to serve from. (Optional)
-    port      \t The port to start the server on. (Optional)
-
-Options:
-    -s, --silent  \t Keep logs at minimal
-    -v, --version \t Display version number
-    -h, --help    \t Show this message
-
-Examples:
-    local-server public/src 9000
-    local-server ../client
-    local-server / 4000
-    local-server
-
-${pck.author ? `Author: \t${author}` : ''}
-${pck.license ? `License: \t${pck.license}` : ''}
-Version: \t${pck.name}@${pck.version}`
+        `Usage: \tlocal-server [directory] [port] [OPTIONS]` +
+        `\n` +
+        `\nInputs:` +
+        `\n\tdirectory \t The directory to serve from. (Optional)` +
+        `\n\tport      \t The port to start the server on. (Optional)` +
+        `\n` +
+        `\nOptions:` +
+        `\n\t-s, --silent  \t Keep logs at minimal` +
+        `\n\t-v, --version \t Display version number` +
+        `\n\t-h, --help    \t Show this message` +
+        `\n` +
+        `\nExamples:` +
+        `\n\tlocal-server public/src 9000` +
+        `\n\tlocal-server ../client` +
+        `\n\tlocal-server / 4000` +
+        `\n\tlocal-server` +
+        `\n` +
+        `${pck.author ? `\nAuthor: \t${author}` : ''}` +
+        `${pck.license ? `\nLicense: \t${pck.license}` : ''}` +
+        `\nVersion: \t${pck.name}@${pck.version}`
     );
 }
 
