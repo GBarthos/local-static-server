@@ -4,7 +4,7 @@
   "description": "Local nodeJS web server for static files",
   "main": "src/index.js",
   "author": "GBarthos",
-  "license": "ISC",
+  "license": "MIT",
   "homepage": "https://github.com/GBarthos/local-static-server",
   "repository": {
     "type": "git",
