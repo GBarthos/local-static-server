@@ -7,13 +7,13 @@ const DELAYED_EXIT_TIMEOUT = 1000;
 let IMMEDIATE_TERMINATION = false;
 
 /* helpers */
-function _processExiting() {
-    process.nextTick(process.exit);
+function _processExiting(code=0) {
+    process.nextTick(process.exit, code);
 }
 
-function _immediateExit() {
+function _immediateExit(code) {
     log('server closed');
-    _processExiting();
+    _processExiting(code);
 }
 
 function _delayedExit() {
@@ -24,7 +24,7 @@ function _delayedExit() {
 function gracefulShutdown(server) {
     if (IMMEDIATE_TERMINATION) {
         log('... immediate termination signaled');
-        _immediateExit();
+        _immediateExit(130);
         return;
     }
 
