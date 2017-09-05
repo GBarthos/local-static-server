@@ -1,4 +1,6 @@
 'use strict';
+const http = require('http');
+const destroyable = require('server-destroy');
 
 const app = require('./application');
 const log = require('./logger');
@@ -36,18 +38,24 @@ getPort(options).then((port) => {
     options.port = port;
     options.callback = null;
 
-    /* start server */
-    server = app({
+    /* create server */
+    server = http.createServer(app({
         directory,
         format: MORGAN_FORMAT,
         silent
-    }).listen(options)
-    .on('listening', function () {
-        const { address, port, family } = server.address();
-        log(`server started at http://${address}:${port}/ on ${family}`);
-        log(`... running on pid [${process.pid}]`);
-        log(`... serving folder "${directory}"`);
-    });
+    }));
+
+    /* enhance server with destroy method */
+    destroyable(server);
+
+    /* start server */
+    server.listen(options)
+        .on('listening', function () {
+            const { address, port, family } = server.address();
+            log(`server started at http://${address}:${port}/ on ${family}`);
+            log(`... running on pid [${process.pid}]`);
+            log(`... serving folder "${directory}"`);
+        });
 });
 
 /* handling termination signals */

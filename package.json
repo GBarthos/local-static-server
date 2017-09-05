@@ -3,7 +3,7 @@
   "version": "1.0.4",
   "description": "Local nodeJS web server for static files",
   "main": "src/index.js",
-  "author": "GBarthos",
+  "author": "gbarthos <gbarthos.info@gmail.com>",
   "license": "MIT",
   "homepage": "https://github.com/GBarthos/local-static-server",
   "repository": {
@@ -41,7 +41,8 @@
   "dependencies": {
     "cors": "^2.8.4",
     "express": "^4.15.4",
-    "morgan": "^1.8.2"
+    "morgan": "^1.8.2",
+    "server-destroy": "^1.0.1"
   },
   "engines": {
     "node": ">=6.11"

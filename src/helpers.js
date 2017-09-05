@@ -2,40 +2,15 @@
 const log = require('./logger');
 const pck = require('../package.json');
 
-const DELAYED_TERMINATION_TIMEOUT = 8000;
-const DELAYED_EXIT_TIMEOUT = 1000;
-let IMMEDIATE_TERMINATION = false;
-
 /* helpers */
-function _processExiting(code=0) {
-    process.nextTick(process.exit, code);
-}
-
-function _immediateExit(code) {
-    log('server closed');
-    _processExiting(code);
-}
-
-function _delayedExit() {
-    log('... server closing timed out, forcefully shutting down');
-    setTimeout(_immediateExit, DELAYED_EXIT_TIMEOUT);
-}
-
 function gracefulShutdown(server) {
-    if (IMMEDIATE_TERMINATION) {
-        log('... immediate termination signaled');
-        _immediateExit(130);
-        return;
-    }
-
     log('... graceful shutdown signaled');
     server.unref();
-    server.close(_immediateExit);
 
-    setTimeout(_delayedExit, DELAYED_TERMINATION_TIMEOUT);
-    setTimeout(() => {
-        IMMEDIATE_TERMINATION = true;
-    }, DELAYED_EXIT_TIMEOUT);
+    server.destroy(()=> {
+        log('server closed');
+        process.exitCode = 130;
+    });
 }
 
 function _printAuthor() {
@@ -96,7 +71,7 @@ function handleVersionArgument(args) {
 function getPortCallback(err, value) {
     if (err.code !== 'EADDRINUSE') {
         log.err(err);
-        _processExiting();
+        process.nextTick(process.exit, 1);
     }
 
     log(`port ${value} is busy ...`);
