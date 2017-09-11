@@ -3,25 +3,19 @@ const http = require('http');
 const destroyable = require('server-destroy');
 
 const app = require('./application');
+const helpers = require('./helpers');
 const log = require('./logger');
+const parser = require('./parser');
 const getPort = require('./port');
 
-const {
-    directory,
-    port,
-    help,
-    version,
-    silent
-} = require('./parser');
-const {
-    getPortCallback,
-    gracefulShutdown,
-    handleHelpArgument,
-    handleVersionArgument
-} = require('./helpers');
+/* high-level variables */
+const directory = parser.directory;
+const port = parser.port;
+const help = parser.help;
+const version = parser.version;
+const silent = parser.silent;
 
-handleHelpArgument({ help });
-handleVersionArgument({ version });
+const gracefulShutdown = helpers.gracefulShutdown;
 
 /* high-level variables */
 const MORGAN_FORMAT = 'tiny';
@@ -33,26 +27,32 @@ const options = {
     callback: getPortCallback
 };
 
-/* getting available port */
-getPort(options).then((port) => {
-    options.port = port;
-    options.callback = null;
+/* handle CLI arguments */
+helpers.handleHelpArgument({ help });
+helpers.handleVersionArgument({ version });
 
+/* getting available port */
+let server;
+getPort(options)
+    .then((port) => {
     /* create server */
-    server = http.createServer(app({
+        server = http.createServer(
+            app({
         directory,
         format: MORGAN_FORMAT,
         silent
-    }));
+            })
+        );
 
     /* enhance server with destroy method */
     destroyable(server);
 
     /* start server */
     server.listen(options)
-        .on('listening', function () {
-            const { address, port, family } = server.address();
-            log(`server started at http://${address}:${port}/ on ${family}`);
+            .on('listening', () => {
+                const address = server.address();
+
+                log(`server started at http://${address.address}:${address.port}/ on ${address.family}`);
             log(`... running on pid [${process.pid}]`);
             log(`... serving folder "${directory}"`);
         });

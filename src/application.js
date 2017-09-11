@@ -4,7 +4,11 @@ const cors = require('cors');
 const express = require('express');
 const morgan = require('morgan');
 
-module.exports = function ({ directory, format, silent }) {
+module.exports = (params) => {
+    const directory = params.directory;
+    const format = params.format;
+    const silent = params.silent;
+
     const app = express();
 
     /* express middleware */
@@ -16,6 +20,6 @@ module.exports = function ({ directory, format, silent }) {
 
     // allow CORS pre-flight
     app.options('*', cors());
-    
+
     return app;
 };
