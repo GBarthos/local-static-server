@@ -7,7 +7,7 @@ function gracefulShutdown(server) {
     log('... graceful shutdown signaled');
     server.unref();
 
-    server.destroy(()=> {
+    server.destroy(() => {
         log('server closed');
         process.exitCode = 130;
     });
@@ -32,17 +32,17 @@ function _printUsage() {
 
     return (
         `Usage: \tlocal-server [directory] [port] [OPTIONS]` +
-        `\n` +
-        `\nInputs:` +
+        `\n\n` +
+        `Inputs:` +
         `\n\tdirectory \t The directory to serve from. (Optional)` +
         `\n\tport      \t The port to start the server on. (Optional)` +
-        `\n` +
-        `\nOptions:` +
+        `\n\n` +
+        `Options:` +
         `\n\t-s, --silent  \t Keep logs at minimal` +
         `\n\t-v, --version \t Display version number` +
         `\n\t-h, --help    \t Show this message` +
-        `\n` +
-        `\nExamples:` +
+        `\n\n` +
+        `Examples:` +
         `\n\tlocal-server public/src 9000` +
         `\n\tlocal-server ../client` +
         `\n\tlocal-server / 4000` +
@@ -58,28 +58,18 @@ function _printUsage() {
 function handleHelpArgument(args) {
     if (args.help) {
         log.bare(_printUsage());
-        process.nextTick(process.exit);
+        process.nextTick(process.exit, 0);
     }
 }
 
 function handleVersionArgument(args) {
     if (args.version) {
         log.bare(_printVersion());
-        process.nextTick(process.exit);
+        process.nextTick(process.exit, 0);
     }
-}
-
-function getPortCallback(err, value) {
-    if (err.code !== 'EADDRINUSE') {
-        log.err(err);
-        process.nextTick(process.exit, 1);
-    }
-
-    log(`port ${value} is busy ...`);
 }
 
 module.exports = {
-    getPortCallback,
     gracefulShutdown,
     handleHelpArgument,
     handleVersionArgument
