@@ -17,14 +17,15 @@ const silent = parser.silent;
 
 const gracefulShutdown = helpers.gracefulShutdown;
 
-/* high-level variables */
 const MORGAN_FORMAT = 'tiny';
-let server;
-const options = {
-    host: 'localhost',
-    port,
+const parameters = {
     exclusive: true,
-    callback: getPortCallback
+    host: '127.0.0.1',
+    port: port
+};
+const options = {
+    onBusyPort: (params) => { log(' ... port '+params.port+' is busy'); },
+    onRetry: (params, context) => { log(' ... retry ('+context.iteration+')'); }
 };
 
 /* handle CLI arguments */
@@ -33,30 +34,34 @@ helpers.handleVersionArgument({ version });
 
 /* getting available port */
 let server;
-getPort(options)
+getPort(parameters, options)
     .then((port) => {
-    /* create server */
+        /* create server */
         server = http.createServer(
             app({
-        directory,
-        format: MORGAN_FORMAT,
-        silent
+                directory,
+                format: MORGAN_FORMAT,
+                silent
             })
         );
 
-    /* enhance server with destroy method */
-    destroyable(server);
+        /* enhance server with destroy method */
+        destroyable(server);
 
-    /* start server */
-    server.listen(options)
+        /* start server */
+        server.listen(parameters)
             .on('listening', () => {
                 const address = server.address();
 
                 log(`server started at http://${address.address}:${address.port}/ on ${address.family}`);
-            log(`... running on pid [${process.pid}]`);
-            log(`... serving folder "${directory}"`);
-        });
-});
+                log(`... running on pid [${process.pid}]`);
+                log(`... serving folder "${directory}"`);
+            });
+    }).catch((rejection) => {
+        const error = rejection.error;
+
+        log.err(error);
+    });
 
 /* handling termination signals */
 process.on('SIGINT',   () => { log.bare(' (SIGINT)');   gracefulShutdown(server) });
