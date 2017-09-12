@@ -1,6 +1,6 @@
 {
   "name": "local-static-server",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Local nodeJS web server for static files",
   "main": "src/index.js",
   "author": "gbarthos <gbarthos.info@gmail.com>",
