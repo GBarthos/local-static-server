@@ -1,12 +1,12 @@
 'use strict';
 const http = require('http');
 const destroyable = require('server-destroy');
+const getPort = require('port-walker');
 
 const app = require('./application');
 const helpers = require('./helpers');
 const log = require('./logger');
 const parser = require('./parser');
-const getPort = require('./port');
 
 /* high-level variables */
 const directory = parser.directory;
